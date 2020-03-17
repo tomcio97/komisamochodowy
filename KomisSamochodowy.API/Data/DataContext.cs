@@ -1,4 +1,4 @@
-using KomisSamochodowy.API.Controllers.Models;
+using KomisSamochodowy.API.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
