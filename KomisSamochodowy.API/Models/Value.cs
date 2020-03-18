@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace KomisSamochodowy.API.Models
 {
     public class Value

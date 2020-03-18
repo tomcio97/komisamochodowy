@@ -10,6 +10,8 @@ import { error } from '@angular/compiler/src/util';
 export class ValueComponent implements OnInit {
 
   values: any;
+  id: any;
+  value: any;
 
   constructor(private htpp: HttpClient) { }
 
@@ -25,5 +27,7 @@ export class ValueComponent implements OnInit {
       console.log(error);
     });
   }
+
+
 
 }
