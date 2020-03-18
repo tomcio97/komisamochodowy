@@ -6,11 +6,13 @@ using KomisSamochodowy.API.Models;
 using KomisSamochodowy.API.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace KomisSamochodowy.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ValuesController : ControllerBase
     {
         private readonly DataContext context;
@@ -19,6 +21,7 @@ namespace KomisSamochodowy.Controllers
             this.context = context;
         }
         // GET api/values
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetValues()
         {
@@ -27,6 +30,7 @@ namespace KomisSamochodowy.Controllers
         }
 
         // GET api/values/5
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetValue(int id)
         {
