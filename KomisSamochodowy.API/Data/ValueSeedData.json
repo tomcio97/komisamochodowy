@@ -1,0 +1,122 @@
+[
+    {
+      "Mark": "Opel",
+      "Model": "Swift",
+      "year": 2006,
+      "EngineCapacity": 1.5,
+      "Photos": [
+        {
+          "url": "https://file.express.pl/file/1418",
+          "isMain": true
+        }
+      ]
+    },
+    {
+      "Mark": "Audi",
+      "Model": "Swift",
+      "year": 2006,
+      "EngineCapacity": 1.7,
+      "Photos": [
+        {
+          "url": "https://file.express.pl/file/1418",
+          "isMain": true
+        }
+      ]
+    },
+    {
+      "Mark": "Volkswagen",
+      "Model": "Swift",
+      "year": 2000,
+      "EngineCapacity": 1.7,
+      "Photos": [
+        {
+          "url": "https://file.express.pl/file/1418",
+          "isMain": true
+        }
+      ]
+    },
+    {
+      "Mark": "Opel",
+      "Model": "Laguna",
+      "year": 2007,
+      "EngineCapacity": 2,
+      "Photos": [
+        {
+          "url": "https://file.express.pl/file/1418",
+          "isMain": true
+        }
+      ]
+    },
+    {
+      "Mark": "Suzuzki",
+      "Model": "Laguna",
+      "year": 2006,
+      "EngineCapacity": 1.9,
+      "Photos": [
+        {
+          "url": "https://file.express.pl/file/1418",
+          "isMain": true
+        }
+      ]
+    },
+    {
+      "Mark": "Opel",
+      "Model": "Golf V",
+      "year": 2000,
+      "EngineCapacity": 1.5,
+      "Photos": [
+        {
+          "url": "https://file.express.pl/file/1418",
+          "isMain": true
+        }
+      ]
+    },
+    {
+      "Mark": "Audi",
+      "Model": "Golf V",
+      "year": 2000,
+      "EngineCapacity": 1.4,
+      "Photos": [
+        {
+          "url": "https://file.express.pl/file/1418",
+          "isMain": true
+        }
+      ]
+    },
+    {
+      "Mark": "Suzuzki",
+      "Model": "Golf V",
+      "year": 2004,
+      "EngineCapacity": 2,
+      "Photos": [
+        {
+          "url": "https://file.express.pl/file/1418",
+          "isMain": true
+        }
+      ]
+    },
+    {
+      "Mark": "Suzuzki",
+      "Model": "Laguna",
+      "year": 2006,
+      "EngineCapacity": 1.5,
+      "Photos": [
+        {
+          "url": "https://file.express.pl/file/1418",
+          "isMain": true
+        }
+      ]
+    },
+    {
+      "Mark": "Renault",
+      "Model": "Golf V",
+      "year": 2006,
+      "EngineCapacity": 1.7,
+      "Photos": [
+        {
+          "url": "https://file.express.pl/file/1418",
+          "isMain": true
+        }
+      ]
+    }
+  ]

@@ -1,14 +1,12 @@
-using System.Collections.Generic;
-
-namespace KomisSamochodowy.API.Models
+namespace KomisSamochodowy.API.Dtos
 {
-    public class Value
+    public class ValueForListDto
     {
         public int Id { get; set; }
         public string Mark { get; set; }
         public string Model { get; set; }
         public string year { get; set; }
         public string EngineCapacity { get; set; }
-        public ICollection<Photo> Photos { get; set; }
+        public string PhotoUrl { get; set; }
     }
 }

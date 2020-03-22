@@ -7,6 +7,8 @@ using KomisSamochodowy.API.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
+using AutoMapper;
+using KomisSamochodowy.API.Dtos;
 
 namespace KomisSamochodowy.Controllers
 {
@@ -16,8 +18,10 @@ namespace KomisSamochodowy.Controllers
     public class ValuesController : ControllerBase
     {
         private readonly DataContext context;
-        public ValuesController(DataContext context)
+        private readonly IMapper mapper;
+        public ValuesController(DataContext context, IMapper mapper)
         {
+            this.mapper = mapper;
             this.context = context;
         }
         // GET api/values
@@ -25,8 +29,10 @@ namespace KomisSamochodowy.Controllers
         [HttpGet]
         public async Task<IActionResult> GetValues()
         {
-            var values = await context.Values.ToListAsync();
-            return Ok(values);
+            var values = await context.Values.Include(p => p.Photos).ToListAsync();
+            var valuesToMapping = mapper.Map<IEnumerable<ValueForListDto>>(values);
+
+            return Ok(valuesToMapping);
         }
 
         // GET api/values/5
@@ -34,9 +40,11 @@ namespace KomisSamochodowy.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetValue(int id)
         {
-            var value = await context.Values.FindAsync(id);
-            if(value == null) return NoContent(); 
-            return Ok(value);
+            var value = await context.Values.Include(p => p.Photos).FirstOrDefaultAsync(v => v.Id == id);
+            if (value == null) return NoContent();
+
+            var valueToMapping = mapper.Map<ValueForDetailedDto>(value);
+            return Ok(valueToMapping);
         }
 
         // POST api/values
@@ -54,11 +62,11 @@ namespace KomisSamochodowy.Controllers
         public async Task<IActionResult> Put(int id, [FromBody] Value value)
         {
             var data = await context.Values.FindAsync(id);
-            
-            if(value.Mark != null) data.Mark = value.Mark;
-            if(value.Model != null)data.Model = value.Model;
-            if(value.year !=null)data.year = value.year;
-            if(value.EngineCapacity !=null)data.EngineCapacity = value.EngineCapacity;
+
+            if (value.Mark != null) data.Mark = value.Mark;
+            if (value.Model != null) data.Model = value.Model;
+            if (value.year != null) data.year = value.year;
+            if (value.EngineCapacity != null) data.EngineCapacity = value.EngineCapacity;
 
             context.Values.Update(data);
 

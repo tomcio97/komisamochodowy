@@ -1,0 +1,18 @@
+[
+  '{{repeat(10)}}',
+  {
+    Mark:'{{random("Opel", "Renault", "Volkswagen", "Audi", "Suzuzki")}}',
+  	Model:'{{random("Astra G", "Laguna", "Golf V", "A4", "Swift")}}',
+    year:'{{random("2000", "2005", "2004", "2006", "2007")}}',
+   	EngineCapacity:'{{random(1.7, 1.9, 1.4, 2.0, 1.5)}}',
+    
+    Photos: [
+    { 
+    url: function(num){
+    return 'https://file.express.pl/file/1418';
+  },
+  isMain: true
+  }
+  ]
+  }
+]
