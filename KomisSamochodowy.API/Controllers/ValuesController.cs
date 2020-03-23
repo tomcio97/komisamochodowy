@@ -25,7 +25,7 @@ namespace KomisSamochodowy.Controllers
             this.context = context;
         }
         // GET api/values
-        //[AllowAnonymous]
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetValues()
         {

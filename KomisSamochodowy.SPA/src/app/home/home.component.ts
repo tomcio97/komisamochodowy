@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NULL_EXPR } from '@angular/compiler/src/output/output_ast';
+import { AuthService } from '../_services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -8,7 +9,7 @@ import { NULL_EXPR } from '@angular/compiler/src/output/output_ast';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   token = localStorage.getItem('token');
   formIsOnly = false;
@@ -18,7 +19,7 @@ export class HomeComponent implements OnInit {
 
   isToken()
   {
-    return !!this.token;
+    return this.authService.loggedIn();
   }
 
   showForm()
