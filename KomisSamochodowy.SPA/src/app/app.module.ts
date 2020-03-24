@@ -13,6 +13,8 @@ import { LoginComponent } from './login/login.component';
 import { AlertifyService } from './_services/Alertify.service';
 import { ValueListComponent } from './value/value-list/value-list.component';
 import { appRoutes } from './routes';
+import { AuthGuard } from './_guards/auth.guard';
+import { ValueCardComponent } from './value/value-card/value-card.component';
 
 export function tokenGetter()
 {
@@ -25,7 +27,8 @@ export function tokenGetter()
       ValueListComponent,
       NavComponent,
       HomeComponent,
-      LoginComponent
+      LoginComponent,
+      ValueCardComponent
    ],
    imports: [
       BrowserModule,
@@ -44,7 +47,8 @@ export function tokenGetter()
    ],
    providers: [
       AuthService,
-      AlertifyService
+      AlertifyService,
+      AuthGuard
    ],
    bootstrap: [
       AppComponent

@@ -2,6 +2,7 @@ import { Component, OnInit, ɵCodegenComponentFactoryResolver } from '@angular/c
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { AuthService } from '../_services/auth.service';
 import { AlertifyService } from '../_services/Alertify.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -11,7 +12,7 @@ import { AlertifyService } from '../_services/Alertify.service';
 export class NavComponent implements OnInit {
 
   model: any = {};
-  constructor(private authService: AuthService, private alertify: AlertifyService) { }
+  constructor(private authService: AuthService, private alertify: AlertifyService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -35,6 +36,7 @@ logout()
 {
   localStorage.removeItem('token');
   this.alertify.message('Zostałeś wylogowany');
+  this.router.navigate(['./home']);
 }
 
 }
