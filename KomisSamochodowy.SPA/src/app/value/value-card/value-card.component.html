@@ -7,6 +7,6 @@
   </div>
   <div class="card-body">
     <p class="card-text text-muted text-center">Rocznik: {{value.year}}, Silnik: {{value.engineCapacity}}</p>
-    <a href="#" class="btn btn-primary">Więcej informacji</a>
+    <a [routerLink]="['/', value.id]" routerLinkActive="router-link-active"  class="btn btn-primary">Więcej informacji</a>
   </div>
 </div>

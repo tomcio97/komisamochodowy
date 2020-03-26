@@ -1,0 +1,27 @@
+<div class="container mt-5">
+    <div class="row">
+        <div clas="col">
+            <div class="card p-5">
+                <ngx-gallery [options]="galleryOptions" [images]="galleryImages" class="ngx-gallery"></ngx-gallery>
+            </div>
+        </div>
+        <div class="col ml-5">
+
+            <div class="tab-panel">
+                <tabset>
+                    <tab heading="Informacje" id="tab1">
+                        <div class="p-4">
+                        <h2><strong>{{value.mark}} {{value.model}}</strong></h2>
+                        <h3 class="text-danger mt-2"><strong>15 000 PLN</strong></h3>
+                        <h4 class="mt-5">Rocznik: {{value.year}} r.</h4>
+                        <h4>Silnik: {{value.engineCapacity}}</h4>
+                        </div>
+                    </tab>
+                    <tab heading="Opis">Tutaj będzie opis</tab>
+                    <tab heading="Zadaj pytanie">Tutaj będzie możliwość zadania pytania</tab>
+                </tabset>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -7,7 +7,7 @@
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav  mr-auto ml-auto " routerLinkActive="active">
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/home']">Strona głowna</a>
+        <a class="nav-link" [routerLink]="['/']">Strona głowna</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" [routerLink]="['/onas']" >O nas</a>
@@ -16,7 +16,7 @@
         <a class="nav-link" [routerLink]="['/kontakt']" >Kontakt</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/']" *ngIf="loggedIn()">Panel administracyjny</a>
+        <a class="nav-link" [routerLink]="['/paneladministracyjny']" *ngIf="loggedIn()">Panel administracyjny</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" *ngIf="loggedIn()" (click)="logout()">Wyloguj</a>

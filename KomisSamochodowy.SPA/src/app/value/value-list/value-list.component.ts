@@ -3,6 +3,7 @@ import { Value } from 'src/app/_models/Value';
 import { HttpClient } from '@angular/common/http';
 import { ValueService } from 'src/app/_services/value.service';
 import { AlertifyService } from 'src/app/_services/Alertify.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-value-list',
@@ -15,20 +16,22 @@ export class ValueListComponent implements OnInit {
   id: any;
   value: any;
 
-  constructor(private htpp: HttpClient, private service: ValueService, private alertifyService: AlertifyService) { }
+  constructor(private alertifyService: AlertifyService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.getValues();
-  }
-
-  getValues()
-  {
-    this.service.getValues().subscribe((values: Value[]) => {
-      this.values = values;
-    }, error =>
-    {
-      this.alertifyService.error(error);
+    this.route.data.subscribe(data =>{
+    this.values = data.values;
     });
   }
+
+  // getValues()
+  // {
+  //   this.service.getValues().subscribe((values: Value[]) => {
+  //     this.values = values;
+  //   }, error =>
+  //   {
+  //     this.alertifyService.error(error);
+  //   });
+  // }
 
 }

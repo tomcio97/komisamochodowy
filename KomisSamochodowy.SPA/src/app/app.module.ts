@@ -15,6 +15,11 @@ import { ValueListComponent } from './value/value-list/value-list.component';
 import { appRoutes } from './routes';
 import { AuthGuard } from './_guards/auth.guard';
 import { ValueCardComponent } from './value/value-card/value-card.component';
+import { ValueDetailComponent } from './value/value-detail/value-detail.component';
+import { TabsModule } from 'ngx-bootstrap';
+import { ValueDetailResolver } from './_resolvers/value-detail.resolver';
+import { ValueListResolver } from './_resolvers/value-list.resolver';
+import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 
 export function tokenGetter()
 {
@@ -28,7 +33,8 @@ export function tokenGetter()
       NavComponent,
       HomeComponent,
       LoginComponent,
-      ValueCardComponent
+      ValueCardComponent,
+      ValueDetailComponent
    ],
    imports: [
       BrowserModule,
@@ -44,11 +50,15 @@ export function tokenGetter()
          }
       ),
       RouterModule.forRoot(appRoutes),
+      TabsModule.forRoot(),
+      NgxGalleryModule
    ],
    providers: [
       AuthService,
       AlertifyService,
-      AuthGuard
+      AuthGuard,
+      ValueDetailResolver,
+      ValueListResolver
    ],
    bootstrap: [
       AppComponent
