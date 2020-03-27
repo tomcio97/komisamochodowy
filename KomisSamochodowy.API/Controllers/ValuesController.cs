@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using AutoMapper;
 using KomisSamochodowy.API.Dtos;
+using System.Security.Claims;
 
 namespace KomisSamochodowy.Controllers
 {
@@ -59,18 +60,15 @@ namespace KomisSamochodowy.Controllers
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, [FromBody] Value value)
+        public async Task<IActionResult> Put(int id, ValueForUpdateDto valueForUpdate)
         {
-            var data = await context.Values.FindAsync(id);
+           var data = await context.Values.FindAsync(id);
 
-            if (value.Mark != null) data.Mark = value.Mark;
-            if (value.Model != null) data.Model = value.Model;
-            if (value.year != null) data.year = value.year;
-            if (value.EngineCapacity != null) data.EngineCapacity = value.EngineCapacity;
+            mapper.Map(valueForUpdate, data);
 
             context.Values.Update(data);
 
-            await context.SaveChangesAsync();
+            await context. SaveChangesAsync();
 
             return Ok(data);
         }

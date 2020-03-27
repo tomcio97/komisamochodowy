@@ -12,6 +12,7 @@ namespace KomisSamochodowy.API.Helpers
             CreateMap<Value, ValueForListDto>().ForMember(dest => dest.PhotoUrl, opt => opt.ResolveUsing(src => src.Photos.FirstOrDefault(p => p.IsMain).Url));
             CreateMap<Value, ValueForDetailedDto>().ForMember(dest => dest.PhotoUrl, opt => opt.ResolveUsing(src => src.Photos.FirstOrDefault(p => p.IsMain).Url));
             CreateMap<Photo, PhotoForDetailedDto>();
+            CreateMap<ValueForUpdateDto, Value>();
         }
         
     }

@@ -1,0 +1,36 @@
+<table class="table">
+  <thead>
+  <tr>
+    <td>ID</td>
+    <td>Marka</td>
+    <td>Model</td>
+    <td>Rocznik</td>
+    <td>Silnik</td>
+  </tr>
+</thead>
+<tbody>
+<tr *ngFor="let value of values">
+  <td>
+    {{value.id}}
+  </td>
+  <td>
+    {{value.mark}}
+  </td>
+  <td>
+    {{value.model}}
+  </td>
+  <td>
+    {{value.year}}
+  </td>
+  <td>
+    {{value.engineCapacity}}
+  </td>
+  <td>
+    <a [routerLink]="['/paneladministracyjny/edytuj', value.id]">Edytuj</a>
+  </td>
+  <td>
+    <a href="#">Usuń</a>
+  </td>
+</tr>
+</tbody>
+</table>

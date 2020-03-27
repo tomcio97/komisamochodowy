@@ -14,6 +14,7 @@ export class ValueListResolver implements Resolve<Value[]>
     resolve(route: ActivatedRouteSnapshot): Observable<Value[]> {
         return this.service.getValues().pipe(catchError(error => {
             this.alertify.error('Problem z pobraniem danych');
+            //console.error('Problem z pobraniem danych');
             this.router.navigate(['']);
             return of(null);
         }

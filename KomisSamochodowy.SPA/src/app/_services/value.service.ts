@@ -24,4 +24,9 @@ getValue(id: number): Observable<Value>
   return this.http.get<Value>(this.baseUrl + 'values/' + id);
 }
 
+updateValue(id: number, value: Value)
+{
+  return this.http.put(this.baseUrl + 'values/' + id, value);
+}
+
 }

@@ -20,6 +20,9 @@ import { TabsModule } from 'ngx-bootstrap';
 import { ValueDetailResolver } from './_resolvers/value-detail.resolver';
 import { ValueListResolver } from './_resolvers/value-list.resolver';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
+import { ValueTableComponent } from './value/value-table/value-table.component';
+import { ValueEditComponent } from './value/value-edit/value-edit.component';
+import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 
 export function tokenGetter()
 {
@@ -34,7 +37,9 @@ export function tokenGetter()
       HomeComponent,
       LoginComponent,
       ValueCardComponent,
-      ValueDetailComponent
+      ValueDetailComponent,
+      ValueTableComponent,
+      ValueEditComponent
    ],
    imports: [
       BrowserModule,
@@ -58,7 +63,8 @@ export function tokenGetter()
       AlertifyService,
       AuthGuard,
       ValueDetailResolver,
-      ValueListResolver
+      ValueListResolver,
+      PreventUnsavedChanges
    ],
    bootstrap: [
       AppComponent

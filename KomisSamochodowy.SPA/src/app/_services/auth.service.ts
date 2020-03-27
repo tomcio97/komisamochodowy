@@ -9,7 +9,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 export class AuthService {
 
   baseUrl = 'http://localhost:5000/api/auth/';
-  jwtHelper = new JwtHelperService()
+  jwtHelper = new JwtHelperService();
 constructor(private http: HttpClient) { }
 
   login(model: any)
