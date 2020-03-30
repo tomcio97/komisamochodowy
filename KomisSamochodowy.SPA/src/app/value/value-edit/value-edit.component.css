@@ -1,0 +1,17 @@
+.th-first
+{
+    border-top: none;
+}
+.img-foredit
+{
+
+   height: 200px !important;
+}
+
+.nv-file-over{
+    border: dotted 2px red;
+}
+
+input[type=file]{
+    color: transparent;
+}

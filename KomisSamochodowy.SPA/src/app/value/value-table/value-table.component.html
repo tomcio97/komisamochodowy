@@ -2,6 +2,7 @@
   <thead>
   <tr>
     <td>ID</td>
+    <td>Zdjęcie</td>
     <td>Marka</td>
     <td>Model</td>
     <td>Rocznik</td>
@@ -17,6 +18,9 @@
 <tr *ngFor="let value of values">
   <td>
     {{value.id}}
+  </td>
+  <td>
+    <img src="{{value.photoUrl}}" class="img-thumbnail" width="70px" height="100px">
   </td>
   <td>
     {{value.mark}}

@@ -23,6 +23,7 @@ import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { ValueTableComponent } from './value/value-table/value-table.component';
 import { ValueEditComponent } from './value/value-edit/value-edit.component';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
+import { FileUploadModule } from 'ng2-file-upload';
 
 export function tokenGetter()
 {
@@ -56,7 +57,8 @@ export function tokenGetter()
       ),
       RouterModule.forRoot(appRoutes),
       TabsModule.forRoot(),
-      NgxGalleryModule
+      NgxGalleryModule,
+      FileUploadModule
    ],
    providers: [
       AuthService,
