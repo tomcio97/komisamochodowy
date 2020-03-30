@@ -1,12 +1,10 @@
-namespace KomisSamochodowy.API.Models
+namespace KomisSamochodowy.API.Dtos
 {
-    public class Photo
+    public class PhotoForReturnDto
     {
         public int Id { get; set; }
         public string Url { get; set; }
         public bool IsMain { get; set; }
         public string public_id { get; set; }
-        public Value value { get; set; }
-        public int ValueId { get; set; }
     }
 }

@@ -3,14 +3,16 @@ using System;
 using KomisSamochodowy.API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace KomisSamochodowy.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20200327191508_extendedValue")]
+    partial class extendedValue
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,8 +28,6 @@ namespace KomisSamochodowy.Migrations
                     b.Property<string>("Url");
 
                     b.Property<int>("ValueId");
-
-                    b.Property<string>("public_id");
 
                     b.HasKey("Id");
 

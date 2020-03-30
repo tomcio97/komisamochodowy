@@ -13,8 +13,6 @@ import { ActivatedRoute } from '@angular/router';
 export class ValueListComponent implements OnInit {
 
   values: Value[];
-  id: any;
-  value: any;
 
   constructor(private alertifyService: AlertifyService, private route: ActivatedRoute) { }
 

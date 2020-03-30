@@ -8,4 +8,10 @@ export interface Value {
     engineCapacity: string;
     photos: Photo[];
     photoUrl: string;
+    price: number;
+    describe: string;
+    fuelType: string;
+    color: string;
+    numberOfDoors: number;
+    mileage: number;
 }

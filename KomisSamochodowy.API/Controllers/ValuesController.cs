@@ -20,9 +20,12 @@ namespace KomisSamochodowy.Controllers
     {
         private readonly DataContext context;
         private readonly IMapper mapper;
-        public ValuesController(DataContext context, IMapper mapper)
+        private readonly IValueRepository repository;
+
+        public ValuesController(DataContext context, IMapper mapper, IValueRepository repository)
         {
             this.mapper = mapper;
+            this.repository = repository;
             this.context = context;
         }
         // GET api/values
@@ -30,9 +33,9 @@ namespace KomisSamochodowy.Controllers
         [HttpGet]
         public async Task<IActionResult> GetValues()
         {
-            var values = await context.Values.Include(p => p.Photos).ToListAsync();
+           var values = await repository.GetValues();
             var valuesToMapping = mapper.Map<IEnumerable<ValueForListDto>>(values);
-
+            
             return Ok(valuesToMapping);
         }
 
@@ -41,7 +44,7 @@ namespace KomisSamochodowy.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetValue(int id)
         {
-            var value = await context.Values.Include(p => p.Photos).FirstOrDefaultAsync(v => v.Id == id);
+            var value = await repository.GetValue(id);
             if (value == null) return NoContent();
 
             var valueToMapping = mapper.Map<ValueForDetailedDto>(value);
@@ -62,15 +65,14 @@ namespace KomisSamochodowy.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, ValueForUpdateDto valueForUpdate)
         {
-           var data = await context.Values.FindAsync(id);
+           var data = await repository.GetValue(id);
 
             mapper.Map(valueForUpdate, data);
 
-            context.Values.Update(data);
+            if(await repository.SaveAll())
+                return Ok(data);
 
-            await context. SaveChangesAsync();
-
-            return Ok(data);
+            return BadRequest();    
         }
 
         // DELETE api/values/5

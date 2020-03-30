@@ -12,12 +12,20 @@
                     <tab heading="Informacje" id="tab1">
                         <div class="p-4">
                         <h2><strong>{{value.mark}} {{value.model}}</strong></h2>
-                        <h3 class="text-danger mt-2"><strong>15 000 PLN</strong></h3>
-                        <h4 class="mt-5">Rocznik: {{value.year}} r.</h4>
-                        <h4>Silnik: {{value.engineCapacity}}</h4>
+                        <h3 class="text-danger mt-2"><strong>{{value.price}} PLN</strong></h3>
+                        <h5 class="mt-5">Rocznik: <strong class="text-primary">{{value.year}} r. </strong></h5>
+                        <h5>Pojemność silnika: <strong class="text-primary">{{value.engineCapacity}}</strong></h5>
+                        <h5>Przebieg: <strong class="text-primary">{{value.mileage}}</strong></h5>
+                        <h5>Rodzaj paliwa:<strong class="text-primary"> {{value.fuelType}}</strong></h5>
+                        <h5>Kolor:<strong class="text-primary"> {{value.color}}</strong></h5>
+                        <h5>Liczba drzwi:<strong class="text-primary">{{value.numberOfDoors}}</strong></h5>
                         </div>
                     </tab>
-                    <tab heading="Opis">Tutaj będzie opis</tab>
+                    <tab heading="Opis">
+                        <div class="p-4">
+                            {{value.describe}}
+                    </div>
+                </tab>
                     <tab heading="Zadaj pytanie">Tutaj będzie możliwość zadania pytania</tab>
                 </tabset>
             </div>

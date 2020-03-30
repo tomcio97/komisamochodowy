@@ -6,6 +6,11 @@
     <td>Model</td>
     <td>Rocznik</td>
     <td>Silnik</td>
+    <td>Cena</td>
+    <td>Rodzaj paliwa</td>
+    <td>Kolor</td>
+    <td>Liczba drzwi</td>
+    <td>Przebieg</td>
   </tr>
 </thead>
 <tbody>
@@ -24,6 +29,21 @@
   </td>
   <td>
     {{value.engineCapacity}}
+  </td>
+  <td>
+    {{value.price}}
+  </td>
+  <td>
+    {{value.fuelType}}
+  </td>
+  <td>
+    {{value.color}}
+  </td>
+  <td>
+    {{value.numberOfDoors}}
+  </td>
+  <td>
+    {{value.mileage}}
   </td>
   <td>
     <a [routerLink]="['/paneladministracyjny/edytuj', value.id]">Edytuj</a>

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using KomisSamochodowy.API.Data;
+using KomisSamochodowy.API.Helpers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -38,8 +39,11 @@ namespace KomisSamochodowy
                 });
             services.AddTransient<Seed>();
             services.AddCors();
+            services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
             services.AddAutoMapper();
             services.AddScoped<IAuthRepository, AuthRepository>();
+            services.AddScoped<IGenericRepository, GenericRepository>();
+            services.AddScoped<IValueRepository, ValueRepository>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                         .AddJwtBearer(options =>
                         {
@@ -60,7 +64,7 @@ namespace KomisSamochodowy
             {
                 app.UseDeveloperExceptionPage();
             }
-            //seed.seedUsers(); //wypełnianie bazy danych losowymi danymi
+            //seed.seedValues(); //wypełnianie bazy danych losowymi danymi
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             app.UseAuthentication();
             app.UseMvc();

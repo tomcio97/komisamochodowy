@@ -13,7 +13,7 @@ namespace KomisSamochodowy.API.Data
             this.context = context;
         }
 
-        public void seedUsers()
+        public void seedValues()
         {
             var value = File.ReadAllText("Data/ValueSeedData.json");
             var values = JsonConvert.DeserializeObject<List<Value>>(value);

@@ -1,9 +1,10 @@
 <div class="card mb-5 p-3">
   <div class="card-body text-center">
     <h5 class="card-title">{{value.mark}} {{value.model}}</h5>
+    <h6 class="text-danger"><strong>{{value.price}} PLN</strong></h6>
   </div>
   <div class="card-img-wrapper">
-  <img class="card-img-top" src="{{value.photoUrl}}" alt="{{value.mark}}, {{value.model}} m-0">
+  <img class="card-img-top" src="{{value.photoUrl}}" alt="{{value.mark}}, {{value.model}}">
   </div>
   <div class="card-body">
     <p class="card-text text-muted text-center">Rocznik: {{value.year}}, Silnik: {{value.engineCapacity}}</p>
