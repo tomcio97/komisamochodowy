@@ -86,5 +86,28 @@ namespace KomisSamochodowy.API.Controllers
             return Ok(photoForReturn);        
         }
 
+        [HttpPost("{id}/setMain")]
+        public async Task<IActionResult> SetMain(int valueId, int id)
+        {
+            var value = await repository.GetValue(valueId);
+
+            if(!value.Photos.Any(p => p.Id == id)) return BadRequest("Brak zdjęcia o takim id");
+
+            var photo = await repository.GetPhoto(id);
+
+            if(photo.IsMain) return BadRequest("To zdjęcie już jest główne");
+
+            var mainPhoto = await repository.getMainPhoto(valueId);
+
+            mainPhoto.IsMain = false;
+
+            photo.IsMain = true;
+
+            if(await repository.SaveAll())
+                return NoContent();
+
+            return BadRequest("Nie można ustawić zdjęcia jako głównego");
+        }
+
     }
 }

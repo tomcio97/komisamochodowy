@@ -29,4 +29,9 @@ updateValue(id: number, value: Value)
   return this.http.put(this.baseUrl + 'values/' + id, value);
 }
 
+setMain(valueId: number, id: number)
+{
+  return this.http.post(this.baseUrl + 'values/' + valueId + '/photos/' + id + '/setMain', {});
+}
+
 }

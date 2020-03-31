@@ -8,6 +8,7 @@ import { ValueService } from 'src/app/_services/value.service';
 import { FileUploader } from 'ng2-file-upload';
 import { environment } from 'src/environments/environment';
 import { Photo } from 'src/app/_models/Photo';
+import { __values } from 'tslib';
 
 
 @Component({
@@ -21,6 +22,7 @@ export class ValueEditComponent implements OnInit {
   uploader: FileUploader;
   hasBaseDropZoneOver: boolean;
   baseUrl = environment.apiUrl;
+  currentMainPhoto: Photo;
 
   @ViewChild('editForm') editForm: NgForm;
   @HostListener('window:beforeunload', ['event'])
@@ -85,5 +87,17 @@ export class ValueEditComponent implements OnInit {
           this.value.photos.push(photo);
         }
       };
+    }
+
+    setMain(photo: Photo)
+    {
+      this.service.setMain(this.value.id, photo.id).subscribe(() =>{
+        this.currentMainPhoto = this.value.photos.filter(p => p.isMain === true)[0];
+        this.currentMainPhoto.isMain = false;
+        photo.isMain = true;
+        this.alertify.success("Zmieniono zdjęcie głowne");
+      },error =>{
+        this.alertify.error("Zdjęcie główne nie zostało zmienione");
+      });
     }
 }

@@ -11,6 +11,6 @@ namespace KomisSamochodowy.API.Data
          Task<Value> GetValue(int id);
 
          Task<Photo> GetPhoto(int id);
-
+        Task<Photo> getMainPhoto(int valueId);
     }
 }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using KomisSamochodowy.API.Models;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,11 @@ namespace KomisSamochodowy.API.Data
         public ValueRepository(DataContext context) : base(context)
         {
             this.context = context;
+        }
+
+        public async Task<Photo> getMainPhoto(int valueId)
+        {
+            return await context.Photos.Where(p => p.ValueId == valueId).FirstOrDefaultAsync(p => p.IsMain);
         }
 
         public async Task<Photo> GetPhoto(int id)
