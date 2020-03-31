@@ -91,7 +91,7 @@ namespace KomisSamochodowy.API.Controllers
         {
             var value = await repository.GetValue(valueId);
 
-            if(!value.Photos.Any(p => p.Id == id)) return BadRequest("Brak zdjęcia o takim id");
+            if(!value.Photos.Any(p => p.Id == id)) return NotFound("Brak zdjęcia o takim id");
 
             var photo = await repository.GetPhoto(id);
 
@@ -107,6 +107,37 @@ namespace KomisSamochodowy.API.Controllers
                 return NoContent();
 
             return BadRequest("Nie można ustawić zdjęcia jako głównego");
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeletePhoto(int valueId, int id)
+        {
+            var value = await repository.GetValue(valueId);
+
+            if(!value.Photos.Any(p => p.Id == id)) return NotFound("Brak zdjęcia o takim id");
+
+            var photo = await repository.GetPhoto(id);
+
+            if(photo.IsMain) return BadRequest("To zdjęcie już jest główne");
+
+            if(photo.public_id != null)
+            {    
+                var destroyParams = new DeletionParams(photo.public_id);
+                var result = cloudinary.Destroy(destroyParams);
+                if(result.Result == "ok")
+                {
+                    repository.Delete(photo);
+                }
+            }
+
+         if(photo.public_id == null) repository.Delete(photo);
+
+         if(await repository.SaveAll())
+         {
+             return Ok(photo);
+         }
+
+        return BadRequest("Nie udało się usunąć");
         }
 
     }

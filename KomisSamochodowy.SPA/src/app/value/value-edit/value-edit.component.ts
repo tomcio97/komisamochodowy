@@ -95,9 +95,19 @@ export class ValueEditComponent implements OnInit {
         this.currentMainPhoto = this.value.photos.filter(p => p.isMain === true)[0];
         this.currentMainPhoto.isMain = false;
         photo.isMain = true;
-        this.alertify.success("Zmieniono zdjęcie głowne");
+        this.alertify.success('Zmieniono zdjęcie głowne');
       },error =>{
-        this.alertify.error("Zdjęcie główne nie zostało zmienione");
+        this.alertify.error('Zdjęcie główne nie zostało zmienione');
+      });
+    }
+
+    deletePhoto(id: number)
+    {
+      this.service.deletePhoto(this.value.id, id).subscribe(()=>{
+        this.value.photos.splice(this.value.photos.findIndex(p => p.id === id), 1);
+        this.alertify.success('Zdjęcie zostało usunięte');
+      }, error =>{
+        this.alertify.error('Nie udało sie usunąć zdjęcia');
       });
     }
 }

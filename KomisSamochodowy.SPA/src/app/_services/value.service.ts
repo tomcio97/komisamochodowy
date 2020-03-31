@@ -34,4 +34,9 @@ setMain(valueId: number, id: number)
   return this.http.post(this.baseUrl + 'values/' + valueId + '/photos/' + id + '/setMain', {});
 }
 
+deletePhoto(valueid: number, id: number)
+{
+  return this.http.delete(this.baseUrl + 'values/' + valueid + '/photos/' + id);
+}
+
 }

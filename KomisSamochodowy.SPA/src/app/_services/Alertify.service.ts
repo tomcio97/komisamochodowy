@@ -28,5 +28,13 @@ message(message: string)
   alertify.message(message);
 }
 
+confirm(message: string, okCallback: () => any){
+  alertify.confirm(message, function(e){
+    if(e)
+    {
+      okCallback();
+    }
+  });
+}
 
 }

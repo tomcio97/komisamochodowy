@@ -111,7 +111,7 @@
     <img  src="{{photo.url}}" class="img-thumbnail img-foredit p-1">
     <div class="mt-1">
     <button type="button" class="btn btn-primary" (click) = "setMain(photo)" [disabled] = "photo.isMain">Ustaw jako główne</button>
-    <button type="button" class="btn btn-secondary ml-1">Usuń</button>
+    <button type="button" class="btn btn-secondary ml-1" (click)="deletePhoto(photo.id)" [disabled] = "photo.isMain">Usuń</button>
   </div>
   </div>
   </div>
