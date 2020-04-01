@@ -15,6 +15,7 @@ namespace KomisSamochodowy.API.Helpers
             CreateMap<ValueForUpdateDto, Value>();
             CreateMap<PhotoForCreationDto, Photo>();
             CreateMap<Photo, PhotoForReturnDto>();
+            CreateMap<ValueForAddedDto, Value>();
         }
         
     }

@@ -10,6 +10,11 @@ using Microsoft.AspNetCore.Authorization;
 using AutoMapper;
 using KomisSamochodowy.API.Dtos;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Http;
+using CloudinaryDotNet.Actions;
+using CloudinaryDotNet;
+using Microsoft.Extensions.Options;
+using KomisSamochodowy.API.Helpers;
 
 namespace KomisSamochodowy.Controllers
 {
@@ -21,12 +26,20 @@ namespace KomisSamochodowy.Controllers
         private readonly DataContext context;
         private readonly IMapper mapper;
         private readonly IValueRepository repository;
+        private readonly IOptions<CloudinarySettings> cloudinaryConfig;
+        private readonly Cloudinary cloudinary;
+    
 
-        public ValuesController(DataContext context, IMapper mapper, IValueRepository repository)
+
+        public ValuesController(DataContext context, IMapper mapper, IValueRepository repository, IOptions<CloudinarySettings> cloudinaryConfig)
         {
             this.mapper = mapper;
             this.repository = repository;
+            this.cloudinaryConfig = cloudinaryConfig;
             this.context = context;
+
+            Account account = new Account(cloudinaryConfig.Value.CloudName, cloudinaryConfig.Value.ApiKey, cloudinaryConfig.Value.ApiSecret);
+            cloudinary = new Cloudinary(account);
         }
         // GET api/values
         [AllowAnonymous]
@@ -53,13 +66,35 @@ namespace KomisSamochodowy.Controllers
 
         // POST api/values
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Value value)
+        public async Task<IActionResult> Post([FromForm] ValueForAddedDto valueForAdded)
         {
-            context.Values.Add(value);
-            await context.SaveChangesAsync();
-
-            return Ok(value);
+            var value = mapper.Map<Value>(valueForAdded);
+            var file = valueForAdded.File;
+            
+            repository.Add(value);
+            if(await repository.SaveAll())
+            {
+                await SavePhoto(value, file);
+                return Ok(value);
+            }
+                
+            
+            return BadRequest("Nie udało sie dodać do bazy");
         }
+
+        // [HttpPost("photo")]
+        // public async Task<IActionResult> PostPhoto([FromForm] PhotoForCreationDto photo)
+        // {
+        //     Photo newPhoto = new Photo{
+        //         Url =  "dupa dupa"
+        //     };
+        //     var value = valuetemporary;
+        //     value.Mark="ale jaja";
+        //     Console.WriteLine("dostalem zdjecie");
+    
+
+        //         return Ok();
+        // }
 
         // PUT api/values/5
         [HttpPut("{id}")]
@@ -86,5 +121,34 @@ namespace KomisSamochodowy.Controllers
 
             return Ok(value);
         }
+
+        public async Task<IActionResult> SavePhoto(Value value, IFormFile file)
+        {
+            if(file.Length > 0)
+            {
+             var uploadResult = new ImageUploadResult();
+             var stream = file.OpenReadStream();
+
+             var uploadParams = new ImageUploadParams()
+                    {
+                        File = new FileDescription(file.Name, stream)
+                    };
+
+                     uploadResult = cloudinary.Upload(uploadParams);
+
+                    var photo = new Photo{
+                        Url= uploadResult.Uri.ToString(),
+                        public_id = uploadResult.PublicId,
+                        IsMain = true
+                    };
+
+                    value.Photos.Add(photo);
+
+                    if(await repository.SaveAll())
+                            return Ok();
+            }
+                           return BadRequest("Nie udało sie dodać zdjęcia"); 
+        }
     }
+    
 }

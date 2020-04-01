@@ -34,7 +34,7 @@ namespace KomisSamochodowy.API.Controllers
             cloudinary = new Cloudinary(account);
         }
 
-        [HttpPost]
+        [HttpPost (Name = "AddPhoto")]
         public async Task<IActionResult> AddedPhotoForValue(int valueId, [FromForm] PhotoForCreationDto photoForCreation)
         {
             var value = await repository.GetValue(valueId);

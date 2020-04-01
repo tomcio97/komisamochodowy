@@ -9,7 +9,7 @@
 </div>
 <div *ngIf="loggedIn()"><h1> Panel Administracyjny </h1>
   <div class="mt-5">
-  <a href="#" class="text-center"><h4>Dodaj samochód</h4></a>
+  <a [routerLink]="['/paneladministracyjny/dodaj']" class="text-center"><h4>Dodaj samochód</h4></a>
     <app-value-table [values] = "values"></app-value-table>
   </div> 
 </div>

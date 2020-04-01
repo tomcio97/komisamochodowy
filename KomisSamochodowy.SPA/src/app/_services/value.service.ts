@@ -39,4 +39,9 @@ deletePhoto(valueid: number, id: number)
   return this.http.delete(this.baseUrl + 'values/' + valueid + '/photos/' + id);
 }
 
+addValue(formData: FormData)
+{
+  return this.http.post<any>(this.baseUrl + 'values', formData);
+}
+
 }

@@ -103,11 +103,13 @@ export class ValueEditComponent implements OnInit {
 
     deletePhoto(id: number)
     {
-      this.service.deletePhoto(this.value.id, id).subscribe(()=>{
-        this.value.photos.splice(this.value.photos.findIndex(p => p.id === id), 1);
-        this.alertify.success('Zdjęcie zostało usunięte');
-      }, error =>{
-        this.alertify.error('Nie udało sie usunąć zdjęcia');
+      this.alertify.confirm('Czy chcesz usunąc zdjęcie ?', ()=>{
+        this.service.deletePhoto(this.value.id, id).subscribe(()=>{
+          this.value.photos.splice(this.value.photos.findIndex(p => p.id === id), 1);
+          this.alertify.success('Zdjęcie zostało usunięte');
+        }, error =>{
+          this.alertify.error('Nie udało sie usunąć zdjęcia');
+        });
       });
     }
 }

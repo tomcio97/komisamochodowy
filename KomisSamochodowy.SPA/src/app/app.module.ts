@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JwtModule } from '@auth0/angular-jwt';
 import { RouterModule } from '@angular/router';
 
@@ -24,6 +24,7 @@ import { ValueTableComponent } from './value/value-table/value-table.component';
 import { ValueEditComponent } from './value/value-edit/value-edit.component';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { FileUploadModule } from 'ng2-file-upload';
+import { ValueAddComponent } from './value/value-add/value-add.component';
 
 export function tokenGetter()
 {
@@ -40,12 +41,14 @@ export function tokenGetter()
       ValueCardComponent,
       ValueDetailComponent,
       ValueTableComponent,
-      ValueEditComponent
+      ValueEditComponent,
+      ValueAddComponent
    ],
    imports: [
       BrowserModule,
       HttpClientModule,
       FormsModule,
+      ReactiveFormsModule,
       JwtModule.forRoot(
          {
             config: {

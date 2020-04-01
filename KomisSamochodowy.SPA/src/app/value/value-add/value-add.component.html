@@ -1,0 +1,106 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <form [formGroup]="valueForm" (ngSubmit)="addValue()">
+        <table class="table">
+          <tr>
+            <th class="p-4 th-first">
+              Marka:
+            </th>
+            <td class="th-first">
+              <input type="text" class="form-control" formControlName="mark" rows=1>
+            </td>
+          </tr>
+          <tr>
+            <th class="p-4">
+              Model:
+            </th>
+            <td>
+              <textarea class="form-control" formControlName="model" rows=1></textarea>
+            </td>
+          </tr>
+          <tr>
+            <th class="p-4">
+              Rocznik:
+            </th>
+            <td>
+              <textarea class="form-control" formControlName="year" rows=1></textarea>
+            </td>
+          </tr>
+          <tr>
+            <th class="p-4">
+              Silnik:
+            </th>
+            <td>
+              <textarea class="form-control" formControlName="engineCapacity" rows=1></textarea>
+            </td>
+          </tr>
+          <tr>
+            <th class="p-4">
+              Cena:
+            </th>
+            <td>
+              <textarea class="form-control" formControlName="price" rows=1></textarea>
+            </td>
+          </tr>
+          <tr>
+            <th class="p-4">
+              Rodzaj paliwa:
+            </th>
+            <td>
+              <textarea class="form-control" formControlName="fuelType" rows=1></textarea>
+            </td>
+          </tr>
+          <tr>
+            <th class="p-4">
+              Kolor:
+            </th>
+            <td>
+              <textarea class="form-control" formControlName="color" rows=1></textarea>
+            </td>
+          </tr>
+          <tr>
+            <th class="p-4">
+              Liczba drzwi:
+            </th>
+            <td>
+              <textarea class="form-control" formControlName="numberOfDoors" rows=1></textarea>
+            </td>
+          </tr>
+          <tr>
+            <th class="p-4">
+              Przebieg:
+            </th>
+            <td>
+              <textarea class="form-control" formControlName="mileage"></textarea>
+            </td>
+          </tr>
+          <tr>
+            <th class="p-4">
+              Opis:
+            </th>
+            <td>
+              <textarea class="form-control" formControlName="describe" rows=4></textarea>
+            </td>
+          </tr>
+          <tr>
+            <th class="p-4">
+              Prześlij zdjęcia:
+            </th>
+            <td> 
+              <input type="file" name="file" multiple (change)="onFileSelect($event)"><br/>
+            </td>
+          </tr>
+          <tr>
+            <td>
+            </td>
+            <td>
+              <button type="submit" class="btn btn-info mr-1" >Dodaj samochód</button>
+              <button type="button" class="btn btn-secondary" [routerLink]="['/paneladministracyjny']">Anuluj</button>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+  </div>
+</div>
