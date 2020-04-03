@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using KomisSamochodowy.API.Helpers;
 using KomisSamochodowy.API.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -31,10 +32,10 @@ namespace KomisSamochodowy.API.Data
             return value;
         }
 
-        public async Task<IEnumerable<Value>> GetValues()
+        public async Task<PagedList<Value>> GetValues(ValueParams valueParams)
         {
-            var values = await context.Values.Include(p => p.Photos).ToListAsync();
-            return values;
+            var values = context.Values.Include(p => p.Photos);
+            return await PagedList<Value>.CreateListAsync(values, valueParams.PageNumber, valueParams.PageSize);
         }
     }
 }

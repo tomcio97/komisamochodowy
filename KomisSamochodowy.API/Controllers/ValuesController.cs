@@ -44,11 +44,13 @@ namespace KomisSamochodowy.Controllers
         // GET api/values
         [AllowAnonymous]
         [HttpGet]
-        public async Task<IActionResult> GetValues()
+        public async Task<IActionResult> GetValues([FromQuery] ValueParams valueParams)
         {
-           var values = await repository.GetValues();
+           var values = await repository.GetValues(valueParams);
             var valuesToMapping = mapper.Map<IEnumerable<ValueForListDto>>(values);
             
+            Response.AddPagination(values.CurrentPage, values.PageSize, values.TotalCount, values.TotalPages);
+
             return Ok(valuesToMapping);
         }
 
