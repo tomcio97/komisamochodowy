@@ -50,6 +50,11 @@ namespace KomisSamochodowy.Controllers
             var valuesToMapping = mapper.Map<IEnumerable<ValueForListDto>>(values);
             
             Response.AddPagination(values.CurrentPage, values.PageSize, values.TotalCount, values.TotalPages);
+            //  string price = "15 000";
+            //  price = price.Replace(" ", "");
+            //  int priceInt = Convert.ToInt16(price.Replace(" ", ""));
+            //  Console.WriteLine("-----------------------------------------------------Cena" + priceInt);
+
 
             return Ok(valuesToMapping);
         }

@@ -10,6 +10,14 @@ namespace KomisSamochodowy.API.Helpers
             get { return pageSize; }
             set { pageSize = (value > MaxPageSize) ? MaxPageSize : value;}
         }
+
+        public string Mark { get; set; }
+        public string Model { get; set; } 
+        public string Year { get; set; }
+        public string EngineCapacity { get; set; }
+        public string PriceFrom { get; set; }
+        public string PriceTo { get; set; } = "1000000";
+        public string OrderBy { get; set; } = "recent";
         
     }
 }

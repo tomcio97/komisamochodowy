@@ -11,5 +11,10 @@
   <div class="mt-5">
   <a [routerLink]="['/paneladministracyjny/dodaj']" class="text-center"><h4>Dodaj samochód</h4></a>
     <app-value-table [values] = "values"></app-value-table>
+    <pagination [boundaryLinks]="true" [totalItems]="pagination.totalItems" [itemsPerPage]="pagination.itemsPerPage"
+      [(ngModel)]="pagination.currentPage" (pageChanged)="pageChanged($event)"
+      previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
+
+      </pagination>
   </div> 
 </div>

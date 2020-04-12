@@ -3,6 +3,8 @@ import { AuthService } from '../_services/auth.service';
 import { AlertifyService } from '../_services/Alertify.service';
 import { Value } from '../_models/Value';
 import { ActivatedRoute } from '@angular/router';
+import { Pagination, PaginationResult } from '../_models/pagination';
+import { ValueService } from '../_services/value.service';
 
 @Component({
   selector: 'app-login',
@@ -14,11 +16,14 @@ export class LoginComponent implements OnInit {
   model: any = {};
   values: Value[];
   formIsOnly = false;
-  constructor(private authService: AuthService, private alertify: AlertifyService, private route: ActivatedRoute) { }
+  pagination: Pagination;
+
+  constructor(private authService: AuthService, private alertify: AlertifyService, private route: ActivatedRoute, private service:ValueService) { }
 
   ngOnInit() {
     this.route.data.subscribe(data =>{
-      this.values = data.values;
+      this.values = data.values.result;
+      this.pagination = data.values.pagination;
     });
   }
 login()
@@ -47,6 +52,21 @@ logout()
 showForm()
 {
   this.formIsOnly = true;
+}
+
+pageChanged(event: any): void {
+  this.pagination.currentPage = event.page;
+  this.getValues();
+}
+getValues()
+{
+  this.service.getValues(this.pagination.currentPage, this.pagination.itemsPerPage).subscribe((res: PaginationResult<Value[]>) => {
+    this.values = res.result;
+    this.pagination = res.pagination;
+  }, error =>
+  {
+    this.alertify.error(error);
+  });
 }
 
 }

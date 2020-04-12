@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JwtModule } from '@auth0/angular-jwt';
 import { RouterModule } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -16,7 +17,7 @@ import { appRoutes } from './routes';
 import { AuthGuard } from './_guards/auth.guard';
 import { ValueCardComponent } from './value/value-card/value-card.component';
 import { ValueDetailComponent } from './value/value-detail/value-detail.component';
-import { TabsModule } from 'ngx-bootstrap';
+import { TabsModule, PaginationModule, BsDropdownModule } from 'ngx-bootstrap';
 import { ValueDetailResolver } from './_resolvers/value-detail.resolver';
 import { ValueListResolver } from './_resolvers/value-list.resolver';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
@@ -25,6 +26,7 @@ import { ValueEditComponent } from './value/value-edit/value-edit.component';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { FileUploadModule } from 'ng2-file-upload';
 import { ValueAddComponent } from './value/value-add/value-add.component';
+
 
 export function tokenGetter()
 {
@@ -46,6 +48,7 @@ export function tokenGetter()
    ],
    imports: [
       BrowserModule,
+      BrowserAnimationsModule,
       HttpClientModule,
       FormsModule,
       ReactiveFormsModule,
@@ -60,6 +63,8 @@ export function tokenGetter()
       ),
       RouterModule.forRoot(appRoutes),
       TabsModule.forRoot(),
+      PaginationModule.forRoot(),
+      BsDropdownModule.forRoot(),
       NgxGalleryModule,
       FileUploadModule
    ],
