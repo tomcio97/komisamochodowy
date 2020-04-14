@@ -18,6 +18,7 @@ namespace KomisSamochodowy.API.Helpers
         public string PriceFrom { get; set; }
         public string PriceTo { get; set; } = "1000000";
         public string OrderBy { get; set; } = "recent";
+        public bool question { get; set; } = false;
         
     }
 }

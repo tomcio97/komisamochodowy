@@ -18,5 +18,6 @@ namespace KomisSamochodowy.API.Models
 
 
         public ICollection<Photo> Photos { get; set; }
+        public ICollection<Question> Questions { get; set; }
     }
 }

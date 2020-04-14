@@ -59,6 +59,14 @@ namespace KomisSamochodowy.Controllers
             return Ok(valuesToMapping);
         }
 
+        [HttpGet("questions")]
+        public async Task<IActionResult> GetValuesWithQuestions()
+        {
+            var valueWithQuestions = await repository.GetQuestionsForValues();
+
+            return Ok(valueWithQuestions);
+        }
+
         // GET api/values/5
         [AllowAnonymous]
         [HttpGet("{id}")]

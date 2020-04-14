@@ -44,6 +44,7 @@ namespace KomisSamochodowy
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IGenericRepository, GenericRepository>();
             services.AddScoped<IValueRepository, ValueRepository>();
+            services.AddScoped<IQuestionRepository, QuestionRepository>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                         .AddJwtBearer(options =>
                         {

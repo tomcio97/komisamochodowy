@@ -27,6 +27,13 @@ namespace KomisSamochodowy.API.Data
             return photo;
         }
 
+        public async Task<IEnumerable<Question>> GetQuestionsForValues()
+        {
+            var question = context.Question.Include(q => q.Value);
+
+            return await question.ToListAsync();
+        }
+
         public async Task<Value> GetValue(int id)
         {
             var value = await context.Values.Include(v => v.Photos).FirstOrDefaultAsync(v => v.Id == id);
@@ -35,7 +42,7 @@ namespace KomisSamochodowy.API.Data
 
         public async Task<PagedList<Value>> GetValues(ValueParams valueParams)
         {
-            var values = context.Values.Include(p => p.Photos).AsQueryable();
+            var values = context.Values.Include(p => p.Photos).Include(q => q.Questions).AsQueryable();
             if(valueParams.Mark != null) values = values.Where(v => v.Mark.ToLower() == valueParams.Mark.ToLower());
             if(valueParams.Model != null) values = values.Where(v => v.Model.ToLower() == valueParams.Model.ToLower());
             if(valueParams.Year != null) values = values.Where(v => v.year.ToLower() == valueParams.Year.ToLower());
