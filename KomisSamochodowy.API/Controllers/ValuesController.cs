@@ -63,8 +63,9 @@ namespace KomisSamochodowy.Controllers
         public async Task<IActionResult> GetValuesWithQuestions()
         {
             var valueWithQuestions = await repository.GetQuestionsForValues();
+            var toReturn = mapper.Map<IEnumerable<QuestionForReturnDto>>(valueWithQuestions);
 
-            return Ok(valueWithQuestions);
+            return Ok(toReturn.OrderByDescending(q => q.sendDate));
         }
 
         // GET api/values/5

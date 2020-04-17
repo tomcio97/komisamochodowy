@@ -17,6 +17,7 @@ namespace KomisSamochodowy.API.Helpers
             CreateMap<Photo, PhotoForReturnDto>();
             CreateMap<ValueForAddedDto, Value>();
             CreateMap<QuestionForCreationDto, Question>().ReverseMap();
+            CreateMap<Question, QuestionForReturnDto>();
         }
         
     }

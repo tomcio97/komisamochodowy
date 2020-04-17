@@ -26,6 +26,11 @@ import { ValueEditComponent } from './value/value-edit/value-edit.component';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { FileUploadModule } from 'ng2-file-upload';
 import { ValueAddComponent } from './value/value-add/value-add.component';
+import { QuestionResolver } from './_resolvers/question.resolver';
+import { ValueQuestionComponent } from './value/value-question/value-question.component';
+import { QuestionService } from './_services/question.service';
+import { EmailService } from './_services/email.service';
+import { ValueAnswerComponent } from './value/value-answer/value-answer.component';
 
 
 export function tokenGetter()
@@ -44,7 +49,9 @@ export function tokenGetter()
       ValueDetailComponent,
       ValueTableComponent,
       ValueEditComponent,
-      ValueAddComponent
+      ValueAddComponent,
+      ValueQuestionComponent,
+      ValueAnswerComponent
    ],
    imports: [
       BrowserModule,
@@ -74,7 +81,10 @@ export function tokenGetter()
       AuthGuard,
       ValueDetailResolver,
       ValueListResolver,
-      PreventUnsavedChanges
+      PreventUnsavedChanges,
+      QuestionResolver,
+      QuestionService,
+      EmailService
    ],
    bootstrap: [
       AppComponent

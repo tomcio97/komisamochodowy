@@ -1,0 +1,9 @@
+<div class="card" *ngFor="let question of questions">
+  <div class="card-body">
+    Marka: {{question.valueMark}}, Model: {{question.valueModel}}, Rocznik: {{question.valueYear}}, Silnik: {{question.valueEngineCapacity}}, Przebieg: {{question.valueMileage}}, Rodzaj paliwa:, {{question.valueFueltype}}, Kolor: {{question.valueColor}}, Cena: {{question.valuePrice}}
+    <p class="p-3 mt-2">Treść pytania: <strong>{{question.content}}</strong></p>
+  </div>
+  <div class="card-footer">
+    <app-value-answer [question] = "question" [questions] ="questions"></app-value-answer>
+  </div>
+</div>

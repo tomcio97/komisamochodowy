@@ -9,7 +9,9 @@
 </div>
 <div *ngIf="loggedIn()"><h1> Panel Administracyjny </h1>
   <div class="mt-5">
+  <a [routerLink]="['/paneladministracyjny/zapytania']" class="text-center mb-3"><h4>Zobacz zapytania</h4></a>
   <a [routerLink]="['/paneladministracyjny/dodaj']" class="text-center"><h4>Dodaj samochód</h4></a>
+
     <app-value-table [values] = "values"></app-value-table>
     <pagination [boundaryLinks]="true" [totalItems]="pagination.totalItems" [itemsPerPage]="pagination.itemsPerPage"
       [(ngModel)]="pagination.currentPage" (pageChanged)="pageChanged($event)"

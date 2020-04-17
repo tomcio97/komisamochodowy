@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using KomisSamochodowy.API.Data;
 using KomisSamochodowy.API.Helpers;
+using KomisSamochodowy.API.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -45,6 +46,7 @@ namespace KomisSamochodowy
             services.AddScoped<IGenericRepository, GenericRepository>();
             services.AddScoped<IValueRepository, ValueRepository>();
             services.AddScoped<IQuestionRepository, QuestionRepository>();
+            services.AddScoped<IEmailService, EmailService>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                         .AddJwtBearer(options =>
                         {

@@ -15,6 +15,12 @@ namespace KomisSamochodowy.API.Data
             this.context = context;           
         }
 
+        public async Task<Question> GetQuestion(int id)
+        {
+            var question =  await context.Question.FirstOrDefaultAsync(q => q.Id == id);
+            return question;
+        }
+
         public async Task<IEnumerable<Question>> GetQuestions()
         {
             return await context.Question.ToListAsync();

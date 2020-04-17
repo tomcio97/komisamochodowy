@@ -11,6 +11,8 @@ import { ValueListResolver } from './_resolvers/value-list.resolver';
 import { ValueEditComponent } from './value/value-edit/value-edit.component';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { ValueAddComponent } from './value/value-add/value-add.component';
+import { QuestionResolver } from './_resolvers/question.resolver';
+import { ValueQuestionComponent } from './value/value-question/value-question.component';
 
 export const appRoutes: Routes = 
 [
@@ -22,5 +24,6 @@ export const appRoutes: Routes =
     {path: 'paneladministracyjny/dodaj', component: ValueAddComponent},
     // tslint:disable-next-line: max-line-length
     {path: 'paneladministracyjny/edytuj/:id', component: ValueEditComponent, resolve: {value: ValueDetailResolver}, canDeactivate: [PreventUnsavedChanges], canActivate: [AuthGuard]},
+    {path: 'paneladministracyjny/zapytania', component: ValueQuestionComponent, resolve: {questions: QuestionResolver}},
     {path: '**', redirectTo: '', pathMatch: 'full'}
 ]

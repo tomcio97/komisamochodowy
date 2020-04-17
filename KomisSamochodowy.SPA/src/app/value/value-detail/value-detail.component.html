@@ -8,7 +8,7 @@
         <div class="col ml-5">
 
             <div class="tab-panel">
-                <tabset>
+                <tabset #staticTabs>
                     <tab heading="Informacje" id="tab1">
                         <div class="p-4">
                         <h2><strong>{{value.mark}} {{value.model}}</strong></h2>
@@ -26,7 +26,15 @@
                             {{value.describe}}
                     </div>
                 </tab>
-                    <tab heading="Zadaj pytanie">Tutaj będzie możliwość zadania pytania</tab>
+                    <tab heading="Zadaj pytanie">
+                        <div class="p-4">
+                        <form #questionForm="ngForm" (ngSubmit)="addQuestion()">
+                            <label>Email: (Odpowiedź zostanie odesłana na ten adres)</label><input class="form-control" type="text" [(ngModel)]= "model.email" name="email" required>
+                           <label class="mt-2">Treść zapytania:</label><textarea class="form-control" type="text" [(ngModel)]= "model.content" name="content" rows=3 required></textarea>
+                            <button [disabled] = "!questionForm.valid"  class="btn btn-primary mt-2"type="submit">Zapytaj</button>
+                        </form>
+                        </div>
+                </tab>
                 </tabset>
             </div>
 
