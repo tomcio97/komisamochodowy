@@ -9,10 +9,13 @@ namespace KomisSamochodowy.API.Data
     public interface IValueRepository: IGenericRepository
     {
          Task<PagedList<Value>> GetValues(ValueParams valueParams);
-         Task<IEnumerable<Question>> GetQuestionsForValues();
-         Task<Value> GetValue(int id);
+         Task<IEnumerable<Question>> GetQuestionsWithValues();
 
-         Task<Photo> GetPhoto(int id);
+        Task<IEnumerable<Question>> GetQuestionsFromValues(int valueId);
+
+        Task<Value> GetValue(int id);
+
+        Task<Photo> GetPhoto(int id);
         Task<Photo> getMainPhoto(int valueId);
     }
 }

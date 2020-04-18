@@ -27,12 +27,20 @@ namespace KomisSamochodowy.API.Data
             return photo;
         }
 
-        public async Task<IEnumerable<Question>> GetQuestionsForValues()
+        public async Task<IEnumerable<Question>> GetQuestionsFromValues(int valueId)
+        {
+            var questions = await context.Question.Where(q => q.ValueId == valueId).ToListAsync();
+            return questions;
+        }
+
+        public async Task<IEnumerable<Question>> GetQuestionsWithValues()
         {
             var question = context.Question.Include(q => q.Value);
 
             return await question.ToListAsync();
         }
+
+        
 
         public async Task<Value> GetValue(int id)
         {

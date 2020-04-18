@@ -28,8 +28,7 @@ namespace KomisSamochodowy.Controllers
         private readonly IValueRepository repository;
         private readonly IOptions<CloudinarySettings> cloudinaryConfig;
         private readonly Cloudinary cloudinary;
-    
-
+        
 
         public ValuesController(DataContext context, IMapper mapper, IValueRepository repository, IOptions<CloudinarySettings> cloudinaryConfig)
         {
@@ -62,7 +61,7 @@ namespace KomisSamochodowy.Controllers
         [HttpGet("questions")]
         public async Task<IActionResult> GetValuesWithQuestions()
         {
-            var valueWithQuestions = await repository.GetQuestionsForValues();
+            var valueWithQuestions = await repository.GetQuestionsWithValues();
             var toReturn = mapper.Map<IEnumerable<QuestionForReturnDto>>(valueWithQuestions);
 
             return Ok(toReturn.OrderByDescending(q => q.sendDate));
@@ -130,8 +129,21 @@ namespace KomisSamochodowy.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var value = await context.Values.FindAsync(id);
-            context.Values.Remove(value);
+            var value = await repository.GetValue(id);
+            if(value != null)
+            {
+                var questions = await repository.GetQuestionsFromValues(id);
+                    foreach(var question in questions)
+                    repository.Delete(question);
+
+                var photos = value.Photos.ToList();
+                foreach(var photo in photos)
+                {
+                   await DeletePhoto(photo);
+                }
+
+                repository.Delete(value);
+            }
 
             await context.SaveChangesAsync();
 
@@ -165,6 +177,25 @@ namespace KomisSamochodowy.Controllers
             }
                            return BadRequest("Nie udało sie dodać zdjęcia"); 
         }
+
+        public async Task<IActionResult> DeletePhoto(Photo photo)
+        {
+                var destroyParams = new DeletionParams(photo.public_id);
+                var result = cloudinary.Destroy(destroyParams);
+                if(result.Result == "ok")
+                {
+                    repository.Delete(photo);
+                }
+                 if(photo.public_id == null) repository.Delete(photo);
+
+                if(await repository.SaveAll())
+                {
+             return Ok(photo);
+            }
+
+        return BadRequest("Nie udało się usunąć");
+        }
+        }
     }
     
-}
+

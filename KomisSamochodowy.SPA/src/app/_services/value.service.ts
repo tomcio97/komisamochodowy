@@ -102,4 +102,9 @@ addValue(formData: FormData)
   return this.http.post<any>(this.baseUrl + 'values', formData);
 }
 
+deleteValue(id: number)
+{
+  return this.http.delete(this.baseUrl + 'values/' + id);
+}
+
 }

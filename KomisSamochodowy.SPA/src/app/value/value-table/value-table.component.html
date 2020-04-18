@@ -53,7 +53,7 @@
     <a [routerLink]="['/paneladministracyjny/edytuj', value.id]">Edytuj</a>
   </td>
   <td>
-    <a href="#">Usuń</a>
+    <a [routerLink]="" (click)="deleteValue(value.id)">Usuń</a>
   </td>
 </tr>
 </tbody>
