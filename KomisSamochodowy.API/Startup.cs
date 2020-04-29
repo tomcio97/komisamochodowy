@@ -70,7 +70,15 @@ namespace KomisSamochodowy
             //seed.seedValues(); //wypełnianie bazy danych losowymi danymi
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             app.UseAuthentication();
-            app.UseMvc();
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+            app.UseMvc(routes => {
+                routes.MapSpaFallbackRoute(
+                    name: "spa",
+                    defaults: new { controller = "Fallback", Action="Index"}
+
+                );
+            });
         }
     }
 }
