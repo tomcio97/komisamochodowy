@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KomisSamochodowy.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200414092122_AddedQuestion")]
-    partial class AddedQuestion
+    [Migration("20200429191358_Initial Mysql")]
+    partial class InitialMysql
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -115,7 +115,7 @@ namespace KomisSamochodowy.Migrations
             modelBuilder.Entity("KomisSamochodowy.API.Models.Question", b =>
                 {
                     b.HasOne("KomisSamochodowy.API.Models.Value", "Value")
-                        .WithMany()
+                        .WithMany("Questions")
                         .HasForeignKey("ValueId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
