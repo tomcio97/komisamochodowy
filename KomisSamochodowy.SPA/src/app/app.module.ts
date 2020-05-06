@@ -31,6 +31,7 @@ import { ValueQuestionComponent } from './value/value-question/value-question.co
 import { QuestionService } from './_services/question.service';
 import { EmailService } from './_services/email.service';
 import { ValueAnswerComponent } from './value/value-answer/value-answer.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 
 export function tokenGetter()
@@ -73,7 +74,8 @@ export function tokenGetter()
       PaginationModule.forRoot(),
       BsDropdownModule.forRoot(),
       NgxGalleryModule,
-      FileUploadModule
+      FileUploadModule,
+      Ng2SearchPipeModule
    ],
    providers: [
       AuthService,

@@ -71,5 +71,4 @@ export class ValueDetailComponent implements OnInit {
     });
   }
 
-
 }

@@ -3,6 +3,7 @@ import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { AuthService } from '../_services/auth.service';
 import { AlertifyService } from '../_services/Alertify.service';
 import { Router } from '@angular/router';
+import { ValueService } from '../_services/value.service';
 
 @Component({
   selector: 'app-nav',
@@ -12,20 +13,11 @@ import { Router } from '@angular/router';
 export class NavComponent implements OnInit {
 
   model: any = {};
-  constructor(private authService: AuthService, private alertify: AlertifyService, private router: Router) { }
+  searchText;
+  constructor(private authService: AuthService, private alertify: AlertifyService, private router: Router, private valueService: ValueService) { }
 
   ngOnInit() {
   }
-// login()
-// {
-//  this.authService.login(this.model).subscribe(next =>
-//   {
-//     console.log('Zalogowałeś sie pomyślnie');
-//   }, error => 
-//   {
-//     console.log('Wystąpił błąd');
-//   });
-// }
 
 loggedIn()
 {
@@ -39,4 +31,15 @@ logout()
   this.router.navigate(['']);
 }
 
+
+setSearchText(text)
+{
+  this.valueService.changeBehaviorSubject(text);
+  this.router.navigate(['']);
+}
+
+resetSearchText()
+{
+  this.valueService.changeBehaviorSubject('');
+}
 }

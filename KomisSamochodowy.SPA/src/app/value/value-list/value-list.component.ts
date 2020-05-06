@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Value } from 'src/app/_models/Value';
 import { HttpClient } from '@angular/common/http';
 import { ValueService } from 'src/app/_services/value.service';
 import { AlertifyService } from 'src/app/_services/Alertify.service';
 import { ActivatedRoute } from '@angular/router';
 import { Pagination, PaginationResult } from 'src/app/_models/pagination';
+import { NgForm, FormGroup, FormControl } from '@angular/forms';
+import { AuthService } from 'src/app/_services/auth.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-value-list',
@@ -16,6 +19,7 @@ export class ValueListComponent implements OnInit {
   values: Value[];
   pagination: Pagination;
   valueParams: any = {};
+  searchText: string;
 
   constructor(private alertifyService: AlertifyService, private route: ActivatedRoute, private service: ValueService) { }
 
@@ -25,6 +29,8 @@ export class ValueListComponent implements OnInit {
     this.pagination = data.values.pagination;
     });
     this.valueParams.orderBy = 'recent';
+    this.service.currentBehaviorSubject.subscribe(value => this.searchText = value);
+
   }
 
   pageChanged(event: any): void {
@@ -38,12 +44,18 @@ export class ValueListComponent implements OnInit {
     .subscribe((res: PaginationResult<Value[]>) => {
       this.values = res.result;
       this.pagination = res.pagination;
-      console.log(this.valueParams.mark);
-      console.log(this.valueParams.model);
     }, error =>
     {
       this.alertifyService.error('Wystąpił błąd');
     });
+  }
+
+  sort()
+  {
+    if(this.valueParams.orderBy === 'price')
+    {
+      this.getValues();
+    }
   }
 
 }

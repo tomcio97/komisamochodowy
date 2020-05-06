@@ -30,7 +30,7 @@
         <input class="form-control ml-1" id="priceTo" [(ngModel)]= "valueParams.priceTo" name="priceTo">
         <button type="submit" class="btn btn-primary ml-2">Szukaj</button>
         <label class="ml-2">Sortuj po: </label>
-        <select class="form-control ml-2" [(ngModel)]= "valueParams.orderBy" name="orderBy" (click)="getValues()">
+        <select class="form-control ml-2" [(ngModel)]= "valueParams.orderBy" name="orderBy" (change)="getValues()">
           <option value="recent">Ostatnio dodane</option>
           <option value="mark">Marka</option>
           <option value="model">Model</option>
@@ -41,11 +41,8 @@
         </select>
       </div>
       </form>
-      <div>
-
-      </div>
       <div class="row">
-        <div *ngFor="let value of values" class="col-lg-4 col-md-6 col-sm-8">
+        <div *ngFor="let value of values | filter:searchText" class="col-lg-4 col-md-6 col-sm-8">
           <app-value-card [value]="value"></app-value-card>
         </div>
       </div>

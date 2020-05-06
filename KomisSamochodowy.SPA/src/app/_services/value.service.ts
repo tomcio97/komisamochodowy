@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { Value } from '../_models/Value';
 import { environment } from 'src/environments/environment';
 import { PaginationResult } from '../_models/pagination';
@@ -13,8 +13,15 @@ import { map } from 'rxjs/operators';
 export class ValueService {
 
 baseUrl = environment.apiUrl;
+behaviorSubject = new BehaviorSubject<string>('');
+currentBehaviorSubject = this.behaviorSubject.asObservable();
 
 constructor(private http: HttpClient) {}
+
+changeBehaviorSubject(text: string)
+{
+  this.behaviorSubject.next(text);
+}
 
 getValues(page?, itemsPerPage?, mark?, model?, year?, engineCapacity?, priceFrom?, priceTo?, orderBy?): Observable<PaginationResult<Value[]>>
 {
