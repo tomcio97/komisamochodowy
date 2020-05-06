@@ -55,7 +55,10 @@ namespace KomisSamochodowy.API.Data
             if(valueParams.Model != null) values = values.Where(v => v.Model.ToLower() == valueParams.Model.ToLower());
             if(valueParams.Year != null) values = values.Where(v => v.year.ToLower() == valueParams.Year.ToLower());
             if(valueParams.EngineCapacity !=null ) values = values.Where(v => v.EngineCapacity == valueParams.EngineCapacity);
-            if(valueParams.PriceFrom != "0" || valueParams.PriceTo != "1000000") values = values.Where(v => Convert.ToInt16(v.price.Replace(" ", "")) >= Convert.ToInt16(valueParams.PriceFrom.Replace(" ", "")) && Convert.ToInt16(v.price.Replace(" ", "")) <= Convert.ToInt16(valueParams.PriceTo.Replace(" ", "")));
+            if(valueParams.PriceFrom != "0" || valueParams.PriceTo != "1000000") values = values.Where(v => 
+            Convert.ToInt32(v.price.Replace(" ", "")) >= Convert.ToInt32(valueParams.PriceFrom.Replace(" ", "")) 
+            && Convert.ToInt32(v.price.Replace(" ", "")) <= Convert.ToInt32(valueParams.PriceTo.Replace(" ", "")));
+            
             if(!string.IsNullOrEmpty(valueParams.OrderBy))
             {
                 switch(valueParams.OrderBy)
@@ -72,7 +75,7 @@ namespace KomisSamochodowy.API.Data
                     break;
                     case "mileage": values = values.OrderBy(v => v.mileage);
                     break;
-                    case "price": values = values.OrderBy(v => Convert.ToInt16(v.price.Replace(" ", "")));
+                    case "price": values = values.OrderBy(v => Convert.ToInt32(v.price.Replace(" ", "")));
                     break;
                 }
             }

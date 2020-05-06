@@ -16,7 +16,7 @@ namespace KomisSamochodowy.API.Helpers
         public string Year { get; set; }
         public string EngineCapacity { get; set; }
         public string PriceFrom { get; set; } = "0";
-        public string PriceTo { get; set; } = "30000";
+        public string PriceTo { get; set; } = "1000000";
         public string OrderBy { get; set; } = "recent";
         public bool question { get; set; } = false;
         
