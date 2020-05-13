@@ -20,6 +20,7 @@ export class ValueListComponent implements OnInit {
   pagination: Pagination;
   valueParams: any = {};
   searchText: string;
+  isFormOnly = false;
 
   constructor(private alertifyService: AlertifyService, private route: ActivatedRoute, private service: ValueService) { }
 
@@ -31,6 +32,11 @@ export class ValueListComponent implements OnInit {
     this.valueParams.orderBy = 'recent';
     this.service.currentBehaviorSubject.subscribe(value => this.searchText = value);
 
+  }
+
+  changeFormOnly()
+  {
+    this.isFormOnly = !this.isFormOnly;
   }
 
   pageChanged(event: any): void {

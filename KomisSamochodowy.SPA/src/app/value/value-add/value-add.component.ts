@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ValueService } from 'src/app/_services/value.service';
 import { AlertifyService } from 'src/app/_services/Alertify.service';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Value } from 'src/app/_models/Value';
 import { environment } from 'src/environments/environment';
 import { FileUploader } from 'ng2-file-upload';
@@ -28,17 +28,17 @@ export class ValueAddComponent implements OnInit {
 
   ngOnInit() {
     this.valueForm = new FormGroup({
-      mark: new FormControl(),
-      model: new FormControl(),
-      year: new FormControl(),
-      engineCapacity: new FormControl(),
-      price: new FormControl(),
-      fuelType: new FormControl(),
-      color: new FormControl(),
-      numberOfDoors: new FormControl(),
-      mileage: new FormControl(),
-      describe: new FormControl(),
-      file: new FormControl()
+      mark: new FormControl('', Validators.required),
+      model: new FormControl('', Validators.required),
+      year: new FormControl('', Validators.required),
+      engineCapacity: new FormControl('', Validators.required),
+      price: new FormControl('', Validators.required),
+      fuelType: new FormControl('', Validators.required),
+      color: new FormControl('', Validators.required),
+      numberOfDoors: new FormControl('', Validators.required),
+      mileage: new FormControl('', Validators.required),
+      describe: new FormControl(''),
+      file: new FormControl('', Validators.required)
     });
 
     //this.initializeUploader();
@@ -72,6 +72,8 @@ export class ValueAddComponent implements OnInit {
 
 addValue()
 {
+  if (this.valueForm.valid)
+  {
   const formData = new FormData();
   formData.append('mark', this.valueForm.get('mark').value);
   formData.append('model', this.valueForm.get('model').value);
@@ -92,5 +94,5 @@ addValue()
       this.alertify.error('Nie udało się dodać');
     });
 }
-
+}
 }

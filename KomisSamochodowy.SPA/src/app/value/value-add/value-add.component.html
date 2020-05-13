@@ -8,7 +8,8 @@
               Marka:
             </th>
             <td class="th-first">
-              <input type="text" class="form-control" formControlName="mark" rows=1>
+              <input type="text" class="form-control" formControlName="mark" rows=1 [ngClass]="{'is-invalid': valueForm.get('mark').errors && valueForm.get('mark').touched}">
+              <div class="invalid-feedback">Podaj markę samochodu</div>
             </td>
           </tr>
           <tr>
@@ -16,7 +17,8 @@
               Model:
             </th>
             <td>
-              <textarea class="form-control" formControlName="model" rows=1></textarea>
+              <input type="text" class="form-control" formControlName="model" [ngClass]="{'is-invalid': valueForm.get('model').errors && valueForm.get('model').touched}">
+              <div class="invalid-feedback">Podaj model samochodu</div>
             </td>
           </tr>
           <tr>
@@ -24,7 +26,8 @@
               Rocznik:
             </th>
             <td>
-              <textarea class="form-control" formControlName="year" rows=1></textarea>
+              <input class="form-control" formControlName="year" [ngClass]="{'is-invalid': valueForm.get('year').errors && valueForm.get('year').touched}">
+              <div class="invalid-feedback">Podaj rocznik samochodu</div>
             </td>
           </tr>
           <tr>
@@ -32,7 +35,8 @@
               Silnik:
             </th>
             <td>
-              <textarea class="form-control" formControlName="engineCapacity" rows=1></textarea>
+              <input class="form-control" formControlName="engineCapacity" [ngClass]="{'is-invalid': valueForm.get('engineCapacity').errors && valueForm.get('engineCapacity').touched}">
+              <div class="invalid-feedback">Podaj silnik samochodu</div>
             </td>
           </tr>
           <tr>
@@ -40,7 +44,8 @@
               Cena:
             </th>
             <td>
-              <textarea class="form-control" formControlName="price" rows=1></textarea>
+              <input class="form-control" formControlName="price" [ngClass]="{'is-invalid': valueForm.get('price').errors && valueForm.get('price').touched}">
+              <div class="invalid-feedback">Podaj cenę samochodu</div>
             </td>
           </tr>
           <tr>
@@ -48,7 +53,8 @@
               Rodzaj paliwa:
             </th>
             <td>
-              <textarea class="form-control" formControlName="fuelType" rows=1></textarea>
+              <input class="form-control" formControlName="fuelType" [ngClass]="{'is-invalid': valueForm.get('fuelType').errors && valueForm.get('fuelType').touched}">
+              <div class="invalid-feedback">Podaj rodzaj paliwa</div>
             </td>
           </tr>
           <tr>
@@ -56,7 +62,8 @@
               Kolor:
             </th>
             <td>
-              <textarea class="form-control" formControlName="color" rows=1></textarea>
+              <input class="form-control" formControlName="color" [ngClass]="{'is-invalid': valueForm.get('color').errors && valueForm.get('color').touched}">
+              <div class="invalid-feedback">Podaj kolor samochodu</div>
             </td>
           </tr>
           <tr>
@@ -64,7 +71,8 @@
               Liczba drzwi:
             </th>
             <td>
-              <textarea class="form-control" formControlName="numberOfDoors" rows=1></textarea>
+              <input class="form-control" formControlName="numberOfDoors" [ngClass]="{'is-invalid': valueForm.get('numberOfDoors').errors && valueForm.get('numberOfDoors').touched}">
+              <div class="invalid-feedback">Podaj liczbę drzwi</div>
             </td>
           </tr>
           <tr>
@@ -72,7 +80,8 @@
               Przebieg:
             </th>
             <td>
-              <textarea class="form-control" formControlName="mileage"></textarea>
+              <input class="form-control" formControlName="mileage" [ngClass]="{'is-invalid': valueForm.get('mileage').errors && valueForm.get('mileage').touched}">
+              <div class="invalid-feedback">Podaj przebieg samochodu</div>
             </td>
           </tr>
           <tr>
@@ -88,14 +97,15 @@
               Prześlij zdjęcia:
             </th>
             <td> 
-              <input type="file" name="file" multiple (change)="onFileSelect($event)"><br/>
+              <input type="file" formControlName="file" multiple (change)="onFileSelect($event)" [ngClass]="{'is-invalid': valueForm.get('file').errors && valueForm.get('file').touched}"><br/>
+              <div class="invalid-feedback">Przynajmniej jedno zdjęcie jest wymagane</div>
             </td>
           </tr>
           <tr>
             <td>
             </td>
             <td>
-              <button type="submit" class="btn btn-info mr-1" >Dodaj samochód</button>
+              <button type="submit" class="btn btn-info mr-1" [disabled]="!valueForm.valid">Dodaj samochód</button>
               <button type="button" class="btn btn-secondary" [routerLink]="['/paneladministracyjny']">Anuluj</button>
             </td>
           </tr>

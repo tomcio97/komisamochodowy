@@ -14,23 +14,9 @@
       miejsce na baner reklamowy
     </div> -->
     <div class="col">
-      <form class="form-inline" #form="ngForm" (ngSubmit)="getValues()" novalidate>
-        <label>Marka: </label>
-        <input class="form-control ml-1"  id="mark" [(ngModel)] = "valueParams.mark" name="mark">
-        <label>Model: </label>
-        <input class="form-control ml-1" id="model" [(ngModel)]= "valueParams.model" name="model">
-        <label>Rocznik: </label>
-        <input class="form-control ml-1" id="year" [(ngModel)]= "valueParams.year" name="year">
-        <label>Silnik: </label>
-        <input class="form-control ml-1" id="engineCapacity" [(ngModel)]= "valueParams.engineCapacity" name="engineCapacity">
-        <div class="row mt-1 ml-auto mr-auto mb-4">
-        <label>Cena od: </label>
-        <input class="form-control ml-1" id="priceFrom" [(ngModel)]= "valueParams.priceFrom" name="priceFrom">
-        <label>Cena do: </label>
-        <input class="form-control ml-1" id="priceTo" [(ngModel)]= "valueParams.priceTo" name="priceTo">
-        <button type="submit" class="btn btn-primary ml-2">Szukaj</button>
-        <label class="ml-2">Sortuj po: </label>
-        <select class="form-control ml-2" [(ngModel)]= "valueParams.orderBy" name="orderBy" (change)="getValues()">
+      <div class="row">
+        <label class="ml-2 mt-2">Sortuj po: </label>
+        <select class="form-control ml-2 sort" [(ngModel)]="valueParams.orderBy" name="orderBy" (change)="getValues()">
           <option value="recent">Ostatnio dodane</option>
           <option value="mark">Marka</option>
           <option value="model">Model</option>
@@ -39,16 +25,34 @@
           <option value="mileage">Przebieg</option>
           <option value="price">Cena</option>
         </select>
+        <button class="btn btn-primary ml-2 mb-4" (click)="changeFormOnly()">Filtrowanie <span class="ml-1 fa" [ngClass] = "{ 'fa-angle-double-down': !isFormOnly, 'fa-angle-double-up': isFormOnly}"></span></button>
       </div>
-      </form>
+      <div class="row mb-4">
+        <form class="form-inline" #form="ngForm" (ngSubmit)="getValues()" novalidate *ngIf="isFormOnly">
+          <div><label>Marka: </label>
+          <input class="form-control ml-1" id="mark" [(ngModel)]="valueParams.mark" name="mark"></div>
+          <div><label>Model: </label>
+          <input class="form-control ml-1" id="model" [(ngModel)]="valueParams.model" name="model"></div>
+          <div><label>Rocznik: </label>
+          <input class="form-control ml-1" id="year" [(ngModel)]="valueParams.year" name="year"></div>
+          <div><label>Silnik: </label>
+          <input class="form-control ml-1" id="engineCapacity" [(ngModel)]="valueParams.engineCapacity"
+            name="engineCapacity"></div>
+          <div><label>Cena od: </label>
+          <input class="form-control ml-1" id="priceFrom" [(ngModel)]="valueParams.priceFrom" name="priceFrom"></div>
+          <div><label>Cena do: </label>
+          <input class="form-control ml-1" id="priceTo" [(ngModel)]="valueParams.priceTo" name="priceTo"></div>
+          <div class="ml-2"><button type="submit" class="btn btn-primary mt-1">Szukaj</button></div>
+        </form>
+      </div>
       <div class="row">
         <div *ngFor="let value of values | filter:searchText" class="col-lg-4 col-md-6 col-sm-8">
           <app-value-card [value]="value"></app-value-card>
         </div>
       </div>
       <pagination [boundaryLinks]="true" [totalItems]="pagination.totalItems" [itemsPerPage]="pagination.itemsPerPage"
-      [(ngModel)]="pagination.currentPage" (pageChanged)="pageChanged($event)"
-      previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
+        [(ngModel)]="pagination.currentPage" (pageChanged)="pageChanged($event)" previousText="&lsaquo;"
+        nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
 
       </pagination>
     </div>
