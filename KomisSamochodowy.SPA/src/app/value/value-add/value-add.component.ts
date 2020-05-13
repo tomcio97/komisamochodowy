@@ -9,6 +9,7 @@ import { Photo } from 'src/app/_models/Photo';
 import { ActivatedRoute, Router } from '@angular/router';
 import { last } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
+import { setTime } from 'ngx-bootstrap/chronos/utils/date-setters';
 
 @Component({
   selector: 'app-value-add',
@@ -25,6 +26,7 @@ export class ValueAddComponent implements OnInit {
 
   constructor(private service: ValueService, private alertify: AlertifyService, private router: Router, private http: HttpClient) { }
 
+  showSpinner = false;
 
   ngOnInit() {
     this.valueForm = new FormGroup({
@@ -72,25 +74,29 @@ export class ValueAddComponent implements OnInit {
 
 addValue()
 {
-  if (this.valueForm.valid)
-  {
-  const formData = new FormData();
-  formData.append('mark', this.valueForm.get('mark').value);
-  formData.append('model', this.valueForm.get('model').value);
-  formData.append('year', this.valueForm.get('year').value);
-  formData.append('engineCapacity', this.valueForm.get('engineCapacity').value);
-  formData.append('price', this.valueForm.get('price').value);
-  formData.append('fuelType', this.valueForm.get('fuelType').value);
-  formData.append('color', this.valueForm.get('color').value);
-  formData.append('numberOfDoors', this.valueForm.get('numberOfDoors').value);
-  formData.append('mileage', this.valueForm.get('mileage').value);
-  formData.append('describe', this.valueForm.get('describe').value);
-  formData.append('file', this.valueForm.get('file').value);
+  if (this.valueForm.valid) {
 
-  this.service.addValue(formData).subscribe( ()=>{
+    this.showSpinner = true;
+
+    const formData = new FormData();
+    formData.append('mark', this.valueForm.get('mark').value);
+    formData.append('model', this.valueForm.get('model').value);
+    formData.append('year', this.valueForm.get('year').value);
+    formData.append('engineCapacity', this.valueForm.get('engineCapacity').value);
+    formData.append('price', this.valueForm.get('price').value);
+    formData.append('fuelType', this.valueForm.get('fuelType').value);
+    formData.append('color', this.valueForm.get('color').value);
+    formData.append('numberOfDoors', this.valueForm.get('numberOfDoors').value);
+    formData.append('mileage', this.valueForm.get('mileage').value);
+    formData.append('describe', this.valueForm.get('describe').value);
+    formData.append('file', this.valueForm.get('file').value);
+
+    this.service.addValue(formData).subscribe( () => {
+    this.showSpinner = false;
     this.alertify.success('Pomyślnie dodano');
     this.router.navigate(['paneladministracyjny']);
   }, error => {
+      this.showSpinner = false;
       this.alertify.error('Nie udało się dodać');
     });
 }

@@ -21,6 +21,7 @@ export class ValueListComponent implements OnInit {
   valueParams: any = {};
   searchText: string;
   isFormOnly = false;
+  showSpinner = false;
 
   constructor(private alertifyService: AlertifyService, private route: ActivatedRoute, private service: ValueService) { }
 
@@ -45,13 +46,16 @@ export class ValueListComponent implements OnInit {
   }
   getValues()
   {
+    this.showSpinner = true;
     // tslint:disable-next-line: max-line-length
     this.service.getValues(this.pagination.currentPage, this.pagination.itemsPerPage, this.valueParams.mark, this.valueParams.model, this.valueParams.year, this.valueParams.engineCapacity, this.valueParams.priceFrom, this.valueParams.priceTo, this.valueParams.orderBy)
     .subscribe((res: PaginationResult<Value[]>) => {
       this.values = res.result;
       this.pagination = res.pagination;
+      this.showSpinner = false;
     }, error =>
     {
+      this.showSpinner = false;
       this.alertifyService.error('Wystąpił błąd');
     });
   }

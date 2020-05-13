@@ -23,6 +23,7 @@ export class ValueEditComponent implements OnInit {
   hasBaseDropZoneOver: boolean;
   baseUrl = environment.apiUrl;
   currentMainPhoto: Photo;
+  showSpinner = false;
 
   @ViewChild('editForm') editForm: NgForm;
   @HostListener('window:beforeunload', ['event'])
@@ -46,13 +47,16 @@ export class ValueEditComponent implements OnInit {
     }
 
     updateValue(){
+      this.showSpinner = true;
       this.service.updateValue(this.value.id, this.value).subscribe(next =>{
         this.alertify.success('Pomyślnie zaktualizowano');
         this.editForm.reset(this.value);
         this.router.navigate(['paneladministracyjny']);
+        this.showSpinner = false;
       }, error =>
       {
         this.alertify.error('Błąd zapisu');
+        this.showSpinner = false;
       });
     }
 
@@ -91,12 +95,15 @@ export class ValueEditComponent implements OnInit {
 
     setMain(photo: Photo)
     {
+      this.showSpinner = true;
       this.service.setMain(this.value.id, photo.id).subscribe(() =>{
         this.currentMainPhoto = this.value.photos.filter(p => p.isMain === true)[0];
         this.currentMainPhoto.isMain = false;
         photo.isMain = true;
+        this.showSpinner = false;
         this.alertify.success('Zmieniono zdjęcie głowne');
       },error =>{
+        this.showSpinner = false;
         this.alertify.error('Zdjęcie główne nie zostało zmienione');
       });
     }

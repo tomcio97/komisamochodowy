@@ -11,6 +11,7 @@ import { AlertifyService } from 'src/app/_services/Alertify.service';
 export class ValueTableComponent implements OnInit {
 
   @Input() values: Value[];
+  showSpinner = false;
 
   constructor(private service: ValueService, private alertify: AlertifyService) { }
 
@@ -21,10 +22,13 @@ export class ValueTableComponent implements OnInit {
 {
   this.alertify.confirm('Czy napewno chcesz usunąc samochód?', ()=>
   {
+    this.showSpinner = true;
     this.service.deleteValue(id).subscribe(() => {
+      this.showSpinner = false;
       this.alertify.success('Usunięto samochód');
       this.values.splice(this.values.findIndex(v => v.id === id), 1);
     }, error => {
+      this.showSpinner = false;
       this.alertify.error('Nie udało się usunąć');
     });
   });
